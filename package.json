@@ -1,6 +1,6 @@
 {
   "name": "fetch-everywhere",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Isomorphic WHATWG Fetch API, for ALL node based environments.",
   "browser": "fetch-npm-browserify.js",
   "main": "fetch-npm-node.js",
@@ -19,16 +19,16 @@
   },
   "homepage": "https://github.com/lucasfeliciano/fetch-everywhere/issues",
   "dependencies": {
-    "node-fetch": "^1.0.1",
+    "node-fetch": "^2.6.6",
     "whatwg-fetch": ">=0.10.0"
   },
   "devDependencies": {
-    "chai": "^1.10.0",
+    "chai": "^4.3.6",
     "es6-promise": "^2.0.1",
+    "fetch-mock": "^9.11.0",
     "jshint": "^2.5.11",
-    "lintspaces-cli": "0.0.4",
-    "mocha": "^2.1.0",
-    "nock": "^0.56.0",
+    "lintspaces-cli": "^0.7.1",
+    "mocha": "^10.0.0",
     "npm-prepublish": "^1.0.2"
   },
   "keywords": [

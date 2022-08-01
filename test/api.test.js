@@ -4,7 +4,7 @@
 require('es6-promise').polyfill();
 require('../fetch-npm-node');
 var expect = require('chai').expect;
-var nock = require('nock');
+var fetchMock = require('fetch-mock');
 var good = 'hello world. 你好世界。';
 var bad = 'good bye cruel world. 再见残酷的世界。';
 
@@ -16,12 +16,14 @@ function responseToText(response) {
 describe('fetch', function() {
 
 	before(function() {
-		nock('https://mattandre.ws')
-			.get('/succeed.txt')
-			.reply(200, good);
-		nock('https://mattandre.ws')
-			.get('/fail.txt')
-			.reply(404, bad);
+		fetchMock.get('https://mattandre.ws/succeed.txt', {
+			status: 200,
+			body: good,
+		});
+		fetchMock.get('https://mattandre.ws/fail.txt', {
+			status: 400,
+			body: bad,
+		});
 	});
 
 	it('should be defined', function() {
@@ -29,7 +31,7 @@ describe('fetch', function() {
 	});
 
 	it('should facilitate the making of requests', function(done) {
-		fetch('//mattandre.ws/succeed.txt')
+		fetch('https://mattandre.ws/succeed.txt')
 			.then(responseToText)
 			.then(function(data) {
 				expect(data).to.equal(good);
@@ -39,7 +41,7 @@ describe('fetch', function() {
 	});
 
 	it('should do the right thing with bad requests', function(done) {
-		fetch('//mattandre.ws/fail.txt')
+		fetch('https://mattandre.ws/fail.txt')
 			.then(responseToText)
 			.catch(function(err) {
 				expect(err.toString()).to.equal("Error: Bad server response");
